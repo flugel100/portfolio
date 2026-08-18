@@ -5,6 +5,7 @@ import type { Lang } from "@/content/site";
 import { featuredProject, otherProjects, type Project } from "@/content/projects";
 import { Container, Eyebrow } from "./section";
 import { Reveal } from "./reveal";
+import { Galeri } from "./galeri";
 
 function StatusDot({ status, t }: { status: Project["status"]; t: Dict }) {
   const tone =
@@ -112,6 +113,12 @@ export function Work({ t, lang }: { t: Dict; lang: Lang }) {
 
                 <Stack items={f.stack} />
               </div>
+            </div>
+
+            {/* Galeri diletakkan di dalam kartu sorotan, setelah kedua kolom:
+                ia memperlihatkan BUKTI dari yang baru saja diklaim di atasnya. */}
+            <div className="border-t border-line px-8 pb-10 sm:px-10 lg:px-14">
+              <Galeri t={t} lang={lang} />
             </div>
           </article>
         </Reveal>

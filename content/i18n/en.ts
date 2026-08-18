@@ -29,16 +29,28 @@ export const en: Dict = {
   hero: {
     status: "Available for new work",
     headline: ["Built carefully.", "Tested before it ships."],
-    lead: "I'm Ali Torihin — an emergency-room clinician who builds Android and web applications. That background isn't incidental: in an ER, double-checking is never wasted time, and being honest about what you don't yet know beats sounding certain.",
+    lead: "I'm Ali Torihin. I work in an emergency department; the rest of my time goes into building Android and web applications. In an ER, double-checking is never wasted time. That habit followed me into how I write code.",
     ctaPrimary: "See the work",
     ctaSecondary: "Start a project",
     scrollHint: "Scroll",
   },
 
+  galeri: {
+    judul: "See it running",
+    petunjuk: "Swipe to see more",
+    sebelumnya: "Previous",
+    berikutnya: "Next",
+    gambar: [
+      "Choose a category: General or Specialist",
+      "The puzzle board; letters are tapped from the tray below",
+      "Puzzle list, marking which ones are already finished",
+      "Dark mode, designed separately rather than colour-inverted",
+    ],
+  },
   work: {
     eyebrow: "Work",
     title: "What I've built",
-    lead: "Five projects, taken from idea to something people can actually use. Several repositories are private — so instead of handing you a code link, I explain the engineering decisions behind them.",
+    lead: "Five projects, taken from idea to something people can actually use. Several repositories are private. So instead of handing you a code link, I explain the engineering decisions behind them.",
     featuredLabel: "Featured",
     tryDemo: "Play it",
     demoNote: "Runs right in your browser",
@@ -78,7 +90,7 @@ export const en: Dict = {
   process: {
     eyebrow: "Process",
     title: "Four steps, and none of them get skipped",
-    lead: "This isn't a methodology invented for this page — it's what I actually run on every project above.",
+    lead: "This isn't a methodology invented for this page. It's what I actually run on every project above.",
     steps: [
       {
         n: "01",
@@ -88,12 +100,12 @@ export const en: Dict = {
       {
         n: "02",
         title: "Plan",
-        body: "Scope gets written down up front — including what will NOT be built, so nothing surprises you halfway.",
+        body: "Scope gets written down up front, including what will not be built. Nothing should surprise you halfway.",
       },
       {
         n: "03",
         title: "Build",
-        body: "Delivered in stages you can try early, rather than disappearing for weeks and returning with one large pile.",
+        body: "Delivered in stages you can try early. Not disappearing for weeks and returning with one large pile.",
       },
       {
         n: "04",
@@ -107,7 +119,7 @@ export const en: Dict = {
     eyebrow: "About",
     title: "Two worlds that reinforce each other",
     body: [
-      "By day I work in an emergency department. In the gaps between shifts, I build applications — from idea and design through code to something people can use.",
+      "By day I work in an emergency department. In the gaps between shifts I build applications, from idea through to something people can use.",
       "The ER taught me that small things carry weight, that double-checking is never wasted, and that admitting uncertainty matters. Those values follow me into every line of code I write.",
       "I would rather finish one thing properly than start ten things half-heartedly.",
     ],
@@ -129,7 +141,7 @@ export const en: Dict = {
   contact: {
     eyebrow: "Contact",
     title: "Got something you want built?",
-    lead: "Just tell me the idea — it doesn't need to be tidy yet. If I'm not the right person for it, I'll tell you that too.",
+    lead: "Just tell me the idea, it doesn't need to be tidy yet. If I'm not the right person for it, I'll tell you that too.",
     whatsapp: "Chat on WhatsApp",
     whatsappNote: "Fastest reply",
     email: "Send an email",
@@ -162,7 +174,7 @@ export const en: Dict = {
     lead: "This is the real game, running in your browser. Nothing to install.",
     load: "Load the demo",
     loadNote:
-      "The build is large (~42 MB) — it loads only after you press the button, so the rest of the site stays fast.",
+      "The build is large, around 42 MB. It loads only after you press the button, so the rest of the site stays fast.",
     loading: "Loading…",
     openNewTab: "Open in a new tab",
   },

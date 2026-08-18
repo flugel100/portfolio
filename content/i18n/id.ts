@@ -22,16 +22,28 @@ export const id = {
   hero: {
     status: "Menerima proyek baru",
     headline: ["Dibangun teliti.", "Diuji sebelum dipakai."],
-    lead: "Saya Ali Torihin — tenaga medis IGD yang membangun aplikasi Android dan web. Latar itu bukan kebetulan: di ruang gawat darurat, mengecek ulang bukan buang waktu, dan jujur soal yang belum pasti jauh lebih berharga daripada terdengar meyakinkan.",
+    lead: "Saya Ali Torihin. Sehari-hari kerja di IGD, sisanya membangun aplikasi Android dan web. Di ruang gawat darurat, mengecek ulang itu bukan buang waktu. Kebiasaan itu terbawa ke cara saya menulis kode.",
     ctaPrimary: "Lihat karya",
     ctaSecondary: "Ajak kerja sama",
     scrollHint: "Gulir",
   },
 
+  galeri: {
+    judul: "Lihat langsung",
+    petunjuk: "Geser untuk melihat lainnya",
+    sebelumnya: "Sebelumnya",
+    berikutnya: "Berikutnya",
+    gambar: [
+      "Pilih kategori: Umum atau Spesialis Medis",
+      "Papan teka-teki; huruf ditap dari baki di bawah",
+      "Daftar soal, dengan penanda mana yang sudah selesai",
+      "Mode gelap, dirancang terpisah dan bukan warna yang dibalik",
+    ],
+  },
   work: {
     eyebrow: "Karya",
     title: "Yang pernah saya bangun",
-    lead: "Lima proyek, dikerjakan dari ide sampai siap dipakai. Sebagian repositorinya privat — jadi alih-alih menyodorkan tautan kode, saya jelaskan keputusan teknis di baliknya.",
+    lead: "Lima proyek, dikerjakan dari ide sampai siap dipakai. Sebagian repositorinya privat. Jadi daripada menyodorkan tautan kode, saya jelaskan keputusan teknis di baliknya.",
     featuredLabel: "Sorotan",
     tryDemo: "Coba mainkan",
     demoNote: "Berjalan langsung di browser",
@@ -71,7 +83,7 @@ export const id = {
   process: {
     eyebrow: "Cara kerja",
     title: "Empat langkah, dan tidak ada yang dilewati",
-    lead: "Ini bukan metodologi yang saya karang untuk halaman ini — ini yang benar-benar saya jalankan di tiap proyek di atas.",
+    lead: "Ini bukan metodologi yang saya karang untuk halaman ini. Ini yang benar-benar saya jalankan di tiap proyek di atas.",
     steps: [
       {
         n: "01",
@@ -81,12 +93,12 @@ export const id = {
       {
         n: "02",
         title: "Rencanakan",
-        body: "Batas pekerjaan ditulis di depan — termasuk apa yang TIDAK dikerjakan, supaya tidak ada kejutan di tengah jalan.",
+        body: "Batas pekerjaan ditulis di depan, termasuk apa yang tidak dikerjakan. Supaya tidak ada kejutan di tengah jalan.",
       },
       {
         n: "03",
         title: "Kerjakan",
-        body: "Dikerjakan bertahap dan bisa dicoba lebih awal, bukan menghilang berminggu-minggu lalu muncul dengan satu tumpukan besar.",
+        body: "Dikerjakan bertahap dan bisa dicoba lebih awal. Bukan menghilang berminggu-minggu lalu muncul dengan satu tumpukan besar.",
       },
       {
         n: "04",
@@ -100,7 +112,7 @@ export const id = {
     eyebrow: "Tentang",
     title: "Dua dunia yang saling melengkapi",
     body: [
-      "Sehari-hari saya bekerja di instalasi gawat darurat. Di sela-selanya, saya membangun aplikasi — dari ide, rancangan, kode, sampai siap dipakai orang.",
+      "Sehari-hari saya bekerja di instalasi gawat darurat. Di sela-selanya saya membangun aplikasi, dari ide sampai siap dipakai orang.",
       "Di IGD saya belajar bahwa hal kecil bisa berarti besar, bahwa mengecek ulang bukan buang waktu, dan bahwa mengakui sesuatu yang belum pasti itu penting. Nilai-nilai itu saya bawa ke setiap baris kode yang saya tulis.",
       "Saya lebih memilih menyelesaikan satu hal dengan benar daripada memulai sepuluh hal yang hambar.",
     ],
@@ -122,7 +134,7 @@ export const id = {
   contact: {
     eyebrow: "Kontak",
     title: "Punya sesuatu yang ingin dibangun?",
-    lead: "Ceritakan saja idenya — belum perlu rapi. Kalau menurut saya bukan saya orang yang tepat, saya akan bilang begitu.",
+    lead: "Ceritakan saja idenya, belum perlu rapi. Kalau menurut saya bukan saya orang yang tepat, saya akan bilang begitu.",
     whatsapp: "Chat WhatsApp",
     whatsappNote: "Paling cepat dibalas",
     email: "Kirim email",
@@ -155,7 +167,7 @@ export const id = {
     lead: "Ini permainan yang sebenarnya, berjalan di browser Anda. Tidak perlu memasang apa pun.",
     load: "Muat demo",
     loadNote:
-      "Berkasnya besar (±42 MB) — sengaja dimuat hanya setelah Anda menekan tombol, supaya halaman lain tetap ringan.",
+      "Berkasnya besar, sekitar 42 MB. Sengaja dimuat hanya setelah Anda menekan tombol, supaya halaman lain tetap ringan.",
     loading: "Memuat…",
     openNewTab: "Buka di tab baru",
   },

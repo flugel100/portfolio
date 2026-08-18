@@ -52,16 +52,12 @@ export const projects: Project[] = [
     },
     highlights: [
       {
-        id: "Teka-teki silang tidak bisa diterjemahkan. Persilangan menuntut huruf yang identik dan panjang kata mengunci petak, jadi tiap bahasa punya soal yang dibangkitkan sendiri.",
+        id: "Teka-teki silang tidak bisa diterjemahkan. Persilangan menuntut huruf yang identik dan panjang kata mengunci petak, jadi soal tiap bahasa dibangkitkan sendiri-sendiri.",
         en: "Crosswords cannot be translated. Intersections demand identical letters and word length locks the grid, so each language gets its own generated puzzles.",
       },
       {
-        id: "Ukuran bank kata ditentukan pengukuran, bukan tebakan. Yang kurang ternyata kata PENDEK, bukan jumlah katanya — 96 istilah panjang tidak pernah terpakai sekali pun.",
-        en: "Word bank size was decided by measurement, not guesswork. What was missing were SHORT words, not more words — 96 long terms were never used once.",
-      },
-      {
-        id: "Konten medisnya direview manusia. Saya menulis draftnya; keputusan akurasi klinis bukan milik saya.",
-        en: "Medical content is human-reviewed. I draft it; clinical accuracy is not mine to sign off.",
+        id: "Ukuran bank kata ditentukan lewat pengukuran, bukan tebakan. Yang kurang ternyata kata pendek, bukan jumlah katanya. Ada 96 istilah panjang yang tidak pernah terpakai sekali pun.",
+        en: "Word bank size was decided by measurement, not guesswork. What was missing were short words, not more words. 96 long terms were never used once.",
       },
     ],
     stack: ["Flutter", "Dart", "Firebase", "GitHub Actions"],
@@ -81,13 +77,13 @@ export const projects: Project[] = [
       en: "Android app · Rust + Kotlin",
     },
     summary: {
-      id: "Terminal dan klien SSH untuk Android, dirancang khusus untuk menjalankan asisten coding AI dari HP. Intinya ditulis dalam Rust; antarmukanya Jetpack Compose.",
-      en: "A terminal and SSH client for Android, built specifically to run AI coding assistants from a phone. Rust at the core; Jetpack Compose for the interface.",
+      id: "Terminal dan klien SSH untuk Android, supaya server bisa dikendalikan penuh dari HP tanpa perlu laptop. Intinya ditulis dalam Rust; antarmukanya Jetpack Compose.",
+      en: "A terminal and SSH client for Android, so a server can be driven entirely from a phone without reaching for a laptop. Rust at the core; Jetpack Compose for the interface.",
     },
     highlights: [
       {
-        id: "Batas antar-bahasa Rust↔Kotlin lewat JNI — bagian yang paling mudah salah dan paling sulit di-debug, jadi paling ketat diuji.",
-        en: "A Rust↔Kotlin boundary over JNI — the easiest part to get wrong and the hardest to debug, so the most tightly tested.",
+        id: "Batas antar-bahasa Rust↔Kotlin lewat JNI. Ini bagian yang paling mudah salah dan paling sulit di-debug, jadi paling ketat diuji.",
+        en: "A Rust↔Kotlin boundary over JNI. This is the easiest part to get wrong and the hardest to debug, so it gets the tightest tests.",
       },
       {
         id: "Benar-benar menyambung ke server lewat internet dari HP, bukan simulasi.",
@@ -107,12 +103,12 @@ export const projects: Project[] = [
     },
     highlights: [
       {
-        id: "Setiap nilai yang dipakai untuk menolak sebuah token wajib tercatat, supaya keputusannya bisa ditelusuri ulang.",
+        id: "Setiap angka yang dipakai untuk menolak sebuah token wajib tercatat, supaya keputusannya bisa ditelusuri ulang.",
         en: "Every value used to reject a token must be logged, so the decision can be retraced later.",
       },
       {
-        id: "Diuji dengan uji mutasi — penyaring yang tidak pernah bisa gagal adalah penyaring yang tidak bekerja.",
-        en: "Verified with mutation testing — a filter that can never fail is a filter that does nothing.",
+        id: "Diuji dengan uji mutasi. Penyaring yang tidak pernah bisa gagal adalah penyaring yang tidak bekerja.",
+        en: "Verified with mutation testing. A filter that can never fail is a filter that does nothing.",
       },
     ],
     stack: ["Python", "WebSocket", "Discord API"],
@@ -128,7 +124,7 @@ export const projects: Project[] = [
     },
     highlights: [
       {
-        id: "Offline-first bukan fitur tambahan melainkan syarat: dipakai di tempat yang justru tidak ada koneksi.",
+        id: "Offline-first di sini bukan fitur tambahan tapi syarat, karena dipakai justru di tempat yang tidak ada koneksinya.",
         en: "Offline-first is a requirement, not a feature: it is used exactly where there is no connection.",
       },
       {
@@ -150,8 +146,8 @@ export const projects: Project[] = [
     },
     highlights: [
       {
-        id: "Fisika 2D dan tata letak yang harus terasa adil — bagian tersulitnya bukan kode, melainkan menyetel rasa.",
-        en: "2D physics and layouts that must feel fair — the hardest part is not the code but tuning the feel.",
+        id: "Fisika 2D dan tata letak yang harus terasa adil. Bagian tersulitnya bukan kodenya, tapi menyetel rasanya.",
+        en: "2D physics and layouts that must feel fair. The hardest part isn't the code, it's tuning the feel.",
       },
     ],
     stack: ["C#", "Unity 6"],
