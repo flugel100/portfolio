@@ -38,7 +38,7 @@ export const en: Dict = {
   work: {
     eyebrow: "Work",
     title: "What I've built",
-    lead: "Six projects, taken from idea to something people can actually use. Several repositories are private — so instead of handing you a code link, I explain the engineering decisions behind them.",
+    lead: "Five projects, taken from idea to something people can actually use. Several repositories are private — so instead of handing you a code link, I explain the engineering decisions behind them.",
     featuredLabel: "Featured",
     tryDemo: "Play it",
     demoNote: "Runs right in your browser",

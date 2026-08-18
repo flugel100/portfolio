@@ -31,7 +31,7 @@ export const id = {
   work: {
     eyebrow: "Karya",
     title: "Yang pernah saya bangun",
-    lead: "Enam proyek, dikerjakan dari ide sampai siap dipakai. Sebagian repositorinya privat — jadi alih-alih menyodorkan tautan kode, saya jelaskan keputusan teknis di baliknya.",
+    lead: "Lima proyek, dikerjakan dari ide sampai siap dipakai. Sebagian repositorinya privat — jadi alih-alih menyodorkan tautan kode, saya jelaskan keputusan teknis di baliknya.",
     featuredLabel: "Sorotan",
     tryDemo: "Coba mainkan",
     demoNote: "Berjalan langsung di browser",

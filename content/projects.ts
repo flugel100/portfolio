@@ -141,23 +141,6 @@ export const projects: Project[] = [
     metrics: [{ value: "85", label: { id: "uji otomatis", en: "automated tests" } }],
   },
   {
-    slug: "llm-router",
-    name: "LLM Router",
-    kind: { id: "Infrastruktur · Python", en: "Infrastructure · Python" },
-    summary: {
-      id: "Proksi yang meneruskan permintaan ke beberapa penyedia model bahasa lewat satu pintu masuk, memilih antara yang murah dan yang pintar sesuai kebutuhan.",
-      en: "A proxy that routes requests to several language-model providers through one entry point, choosing between cheap and capable as needed.",
-    },
-    highlights: [
-      {
-        id: "Berjalan sebagai layanan systemd dan saya pakai sendiri setiap hari — jadi kekurangannya ketahuan cepat.",
-        en: "Runs as a systemd service and I use it daily — so its flaws surface fast.",
-      },
-    ],
-    stack: ["Python", "REST API", "systemd"],
-    status: "live",
-  },
-  {
     slug: "spark",
     name: "Spark!",
     kind: { id: "Game · Studio flugel100", en: "Game · flugel100 studio" },
