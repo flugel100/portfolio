@@ -1,4 +1,4 @@
-const { chromium } = require('playwright');
+import { chromium } from 'playwright';
 
 // Dipakai lawan build lokal (`npx serve out`) maupun situs hidup:
 //   node tools/qa/periksa.js https://app.flugel.my.id

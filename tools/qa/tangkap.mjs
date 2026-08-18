@@ -1,5 +1,5 @@
-const { chromium } = require('playwright');
-const fs = require('fs');
+import { chromium } from 'playwright';
+import fs from 'node:fs';
 
 /**
  * Tangkap per-VIEWPORT pada posisi gulir nyata, bukan fullPage.

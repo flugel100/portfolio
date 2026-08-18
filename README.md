@@ -72,17 +72,17 @@ npm run build          # menghasilkan out/
 ## QA
 
 ```bash
-node tools/qa/tangkap.js <base> <keluar> <path> <skema> <lebar> <tinggi>
-node tools/qa/periksa.js https://app.flugel.my.id
+node tools/qa/tangkap.mjs <base> <keluar> <path> <skema> <lebar> <tinggi>
+node tools/qa/periksa.mjs https://app.flugel.my.id
 ```
 
-`tangkap.js` menangkap **per-viewport pada posisi gulir nyata**, bukan
+`tangkap.mjs` menangkap **per-viewport pada posisi gulir nyata**, bukan
 `fullPage` — `animation-timeline: view()` dihitung dari tinggi viewport,
 sehingga tangkapan `fullPage` memaksa viewport setinggi halaman dan membuat
 seluruh reveal terbaca "belum masuk rentang". Hasilnya halaman tampak kosong:
 artefak alat, bukan keadaan yang dilihat pengguna.
 
-`periksa.js` mengukur kontras di kedua tema dan memastikan
+`periksa.mjs` mengukur kontras di kedua tema dan memastikan
 `prefers-reduced-motion` benar-benar mematikan animasi.
 
 ## Deploy
