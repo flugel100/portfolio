@@ -22,7 +22,7 @@ export const id = {
   hero: {
     status: "Menerima proyek baru",
     headline: ["Dibangun teliti.", "Diuji sebelum dipakai."],
-    lead: "Saya Ali Torihin — tenaga medis IGD yang membangun aplikasi Android dan web. Latar itu bukan kebetulan: di ruang gawat darurat, mengecek ulang bukan buang waktu, dan jujur soal yang belum pasti jauh lebih berharga daripada terdengar meyakinkan.",
+    lead: "Saya Ali Torihin — tenaga medis IGD yang membangun aplikasi Android dan web. Latar itu bukan kebetulan: di ruang gawat darurat, mengecek ulang bukan buang waktu, dan jujur soal yang belum pasti jauh lebih berharga daripada terdengar meyakinkan.",
     ctaPrimary: "Lihat karya",
     ctaSecondary: "Ajak kerja sama",
     scrollHint: "Gulir",

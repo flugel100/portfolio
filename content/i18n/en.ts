@@ -29,7 +29,7 @@ export const en: Dict = {
   hero: {
     status: "Available for new work",
     headline: ["Built carefully.", "Tested before it ships."],
-    lead: "I'm Ali Torihin — an emergency-room clinician who builds Android and web applications. That background isn't incidental: in an ER, double-checking is never wasted time, and being honest about what you don't yet know beats sounding certain.",
+    lead: "I'm Ali Torihin — an emergency-room clinician who builds Android and web applications. That background isn't incidental: in an ER, double-checking is never wasted time, and being honest about what you don't yet know beats sounding certain.",
     ctaPrimary: "See the work",
     ctaSecondary: "Start a project",
     scrollHint: "Scroll",
