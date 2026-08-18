@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# Deploy portofolio ke /var/www/app.flugel.my.id.
+#
+# nginx di sana melayani berkas statis apa adanya (`try_files $uri $uri/ =404`)
+# dan TIDAK perlu diubah -- output `next build` dengan `output: "export"` sudah
+# cocok dengan pola itu.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+WEBROOT="/var/www/app.flugel.my.id"
+DEMO_SRC="/root/jagoan-medis/build/web"
+DEMO_DEST="$WEBROOT/demo/jagoan-medis/app"
+STAMP="$(date +%Y%m%d-%H%M)"
+
+echo "==> Gerbang mutu"
+npm run lint
+npm run build
+
+echo "==> Cadangkan situs yang sedang hidup"
+mkdir -p /root/backup
+tar -czf "/root/backup/app.flugel.my.id-${STAMP}.tar.gz" -C /var/www app.flugel.my.id
+echo "    /root/backup/app.flugel.my.id-${STAMP}.tar.gz"
+
+echo "==> Sinkronkan halaman"
+# --delete membuang sisa build lama, TAPI dua hal wajib selamat:
+#   .well-known/ -> jalur tantangan ACME. Menghapusnya memutus perpanjangan
+#                   otomatis sertifikat, dan itu baru ketahuan saat kedaluwarsa.
+#   /demo/       -> berisi salinan aplikasi lain (±42 MB); disinkronkan
+#                   terpisah di bawah supaya tidak ikut terhapus tiap deploy.
+#
+# Garis miring di DEPAN pada '/demo/' itu penting dan bukan gaya penulisan:
+# tanpa itu, rsync mencocokkan direktori bernama `demo` di KEDALAMAN MANA PUN
+# -- termasuk `id/demo/` dan `en/demo/` milik halaman demo kita sendiri, yang
+# akibatnya tidak pernah ikut ter-deploy dan menghasilkan 404. Ketahuan karena
+# verifikasi menembak URL hidup, bukan memeriksa berkas lokal.
+rsync -a --delete \
+  --exclude '/.well-known/' \
+  --exclude '/demo/' \
+  out/ "$WEBROOT/"
+
+echo "==> Sinkronkan demo Jagoan Medis"
+if [ -d "$DEMO_SRC" ]; then
+  mkdir -p "$DEMO_DEST"
+  rsync -a --delete "$DEMO_SRC/" "$DEMO_DEST/"
+  echo "    $(du -sh "$DEMO_DEST" | cut -f1) ter-deploy"
+else
+  echo "    LEWAT: $DEMO_SRC tidak ada -- tombol demo akan 404."
+fi
+
+# Catatan kerja internal TIDAK ikut terbit. Versi lama situs ini sempat
+# menyajikan docs/session-log.md ke publik (HTTP 200) berisi nama & id Cloud
+# Firewall Linode serta posture port. rsync --delete di atas sudah
+# membuangnya; baris ini menjaga kalau suatu saat ada yang menaruhnya lagi.
+rm -rf "$WEBROOT/docs"
+
+echo "==> Verifikasi terhadap URL HIDUP (bukan berkas lokal)"
+fail=0
+check() { # url  kode-harapan
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$1")
+  if [ "$code" = "$2" ]; then printf '    OK    %-52s %s\n' "$1" "$code"
+  else printf '    GAGAL %-52s %s (harusnya %s)\n' "$1" "$code" "$2"; fail=1; fi
+}
+check https://app.flugel.my.id/            200
+check https://app.flugel.my.id/id/         200
+check https://app.flugel.my.id/en/         200
+check https://app.flugel.my.id/og.png      200
+check https://app.flugel.my.id/sitemap.xml 200
+check https://app.flugel.my.id/id/demo/jagoan-medis/ 200
+check https://app.flugel.my.id/demo/jagoan-medis/app/index.html 200
+check https://app.flugel.my.id/docs/session-log.md 404
+
+[ "$fail" -eq 0 ] || { echo "==> ADA YANG GAGAL"; exit 1; }
+echo "==> Selesai."

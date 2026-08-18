@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ali Torihin — flugel100</title>
+    <link rel="canonical" href="https://app.flugel.my.id/id/" />
+    <link rel="alternate" hreflang="id" href="https://app.flugel.my.id/id/" />
+    <link rel="alternate" hreflang="en" href="https://app.flugel.my.id/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://app.flugel.my.id/id/" />
+    <meta http-equiv="refresh" content="0; url=/id/" />
+    <script>
+      // Hormati bahasa peramban kalau memang Inggris; selain itu ke Indonesia.
+      // Ditaruh setelah meta refresh supaya tetap berpindah walau JS mati.
+      (function () {
+        var en = (navigator.language || "").toLowerCase().indexOf("en") === 0;
+        location.replace(en ? "/en/" : "/id/");
+      })();
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        min-height: 100svh;
+        margin: 0;
+        background: #08090a;
+        color: #f4f4f5;
+      }
+      a { color: #2dd4c8; }
+    </style>
+  </head>
+  <body>
+    <!-- Terlihat hanya kalau redirect gagal total. -->
+    <p>
+      <a href="/id/">Bahasa Indonesia</a> · <a href="/en/">English</a>
+    </p>
+  </body>
+</html>

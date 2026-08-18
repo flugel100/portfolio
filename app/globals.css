@@ -1,26 +1,220 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Sistem desain -- diturunkan dari riset Stripe/Linear/Vercel, bukan dari
+  daftar tren. Empat prinsip yang saling menguatkan:
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  1. KONTRAS TINGGI      -- tidak ada abu-abu berlumpur di antara.
+  2. WHITESPACE BERLEBIH -- ambil jarak yang terasa cukup, lalu gandakan.
+  3. MONOKROM + 1 AKSEN  -- aksen dipakai sebagai penanda, bukan dekorasi.
+  4. TIPOGRAFI TAJAM     -- geometris & ketat. Font bulat/ramah justru
+                            sumber kesan "template AI" di versi lama.
+*/
+
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Skala tipografi: rasio ketat, bukan langkah besar sembarangan. */
+  --text-display: clamp(2.75rem, 7vw, 5.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.04em;
+
+  --text-title: clamp(1.875rem, 3.5vw, 3rem);
+  --text-title--line-height: 1.05;
+  --text-title--letter-spacing: -0.03em;
+
+  --text-lead: clamp(1.0625rem, 1.6vw, 1.375rem);
+  --text-lead--line-height: 1.6;
+
+  /*
+    Ritme vertikal antar-section. Nilai ini dipakai sebagai padding ATAS DAN
+    BAWAH, jadi jarak yang benar-benar terlihat di antara dua section adalah
+    DUA KALI angka ini. Versi pertama memakai 12rem dan menghasilkan rongga
+    384px -- halaman jadi 7.664px dan terasa seperti menggulir ruang kosong.
+    Prinsip "gandakan whitespace" berlaku pada jarak yang TERLIHAT, bukan pada
+    angka yang diketik.
+  */
+  --spacing-section: clamp(4.5rem, 8vw, 7rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/*
+  Token warna. Terang didefinisikan di `:root` telanjang; gelap menimpa
+  HANYA token, lewat dua pintu -- preferensi sistem dan pilihan eksplisit --
+  supaya toggle menang di kedua arah.
+*/
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #fafafa;
+  --bg-raised: #ffffff;
+  --fg: #0a0a0b;
+  --fg-muted: #52525b;
+  /* QA 2026-08-18: nilai lama #8a8a94 cuma berkontras 3,42 di atas putih dan
+     3,27 di atas bg-subtle -- di bawah ambang 4,5 untuk teks kecil, padahal
+     token ini dipakai untuk teks sungguhan (kategori proyek, label metrik,
+     catatan kontak), bukan sekadar hiasan. Diukur ulang, bukan dikira-kira. */
+  --fg-faint: #6f6f78;
+  --line: #e6e6ea;
+  --line-strong: #d0d0d8;
+
+  /* Aksen tunggal. Kontinuitas merek flugel100, dipakai hemat.
+     Nilai terang digelapkan dari #0da3a3 supaya teks aksen di atas
+     latar putih lolos ambang 4,5 -- #0da3a3 sendiri cuma ~2,6. */
+  --accent: #0a7d7d;
+  --accent-fg: #ffffff;
+  --accent-soft: #eefaf9;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --bg: #08090a;
+    --bg-subtle: #0d0e10;
+    --bg-raised: #121316;
+    --fg: #f4f4f5;
+    --fg-muted: #a1a1aa;
+    /* Sama seperti mode terang: #6d6d78 hanya 3,63-3,90 di atas ketiga
+       permukaan gelap. Diangkat sampai lolos 4,5 di permukaan TERGELAP
+       sekalipun. */
+    --fg-faint: #828290;
+    --line: #1f2023;
+    --line-strong: #2e2f34;
+    --accent: #2dd4c8;
+    --accent-fg: #04211f;
+    --accent-soft: #0e2523;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root[data-theme="dark"] {
+  --bg: #08090a;
+  --bg-subtle: #0d0e10;
+  --bg-raised: #121316;
+  --fg: #f4f4f5;
+  --fg-muted: #a1a1aa;
+  --fg-faint: #828290;
+  --line: #1f2023;
+  --line-strong: #2e2f34;
+  --accent: #2dd4c8;
+  --accent-fg: #04211f;
+  --accent-soft: #0e2523;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-raised: var(--bg-raised);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Nav sticky menutupi target anchor kalau ini tidak diatur. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus ring digarap sekali di sini, bukan ditambal per komponen.
+     Riset menyebut microstate justru inti kesan premium. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  /* Angka sejajar di tabel/statistik -- detail kecil yang membedakan. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Command palette: masuk halus, keluar seketika.
+   Penutupan yang instan justru benar untuk palette -- pengguna sudah memilih,
+   menahannya di layar demi animasi hanya memperlambat. */
+@keyframes palette-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.palette-panel { animation: palette-in 0.18s var(--ease-out-expo) both; }
+.palette-overlay { animation: overlay-in 0.18s ease-out both; }
+
+/*
+  Scroll reveal, murni CSS. Keadaan DASAR-nya terlihat -- animasi hanya
+  dipasang kalau peramban mendukung `animation-timeline`. Tidak ada kondisi
+  apa pun yang bisa menyisakan isi tak terlihat.
+*/
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  [data-reveal] {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    /* Selesai jauh sebelum elemen sampai tengah layar; kalau terlalu lambat,
+       pembaca menunggu teks muncul dan itu terasa mengganggu, bukan halus. */
+    animation-range: entry 0% cover 20%;
+  }
+
+  /* Jeda bertahap antar-elemen dalam satu kelompok. Dinyatakan sebagai
+     PERGESERAN RENTANG, bukan `animation-delay` -- pada linimasa berbasis
+     gulir, delay berbasis waktu tidak berlaku. */
+  [data-reveal][style*="--reveal-order"] {
+    animation-range: entry calc(var(--reveal-order) * 40%) cover 24%;
+  }
+}
+
+/*
+  prefers-reduced-motion dihormati secara menyeluruh, bukan per-animasi.
+  Transisi tidak dinolkan (itu bikin state berubah mengagetkan) melainkan
+  dipangkas jadi sangat singkat.
+*/
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  /* Isi langsung tampil di tempatnya -- tanpa geser, tanpa pudar. */
+  [data-reveal] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
