@@ -76,6 +76,27 @@ Nol console error & nol overflow horizontal di 375/768/1280/1920 px, dua tema.
 terverifikasi di situs hidup: **0 iframe sebelum klik**, 42 MB tidak diunduh
 sampai diminta.
 
+**Temuan dari HP Tor (setelah deploy) — rongga raksasa di hero:**
+Tangkapan layar Tor memperlihatkan hero nyaris kosong: konten terdorong ke
+tengah dengan ruang hampa besar di atas dan bawahnya. Chrome-nya dalam mode
+"Situs desktop", yang melaporkan viewport ~980x2178.
+
+Direproduksi persis sebelum diperbaiki: pada 980x2178 hero menjadi **1699px**
+dengan **634px kosong di atas** dan **666px di bawah**. Sebabnya
+`min-h-[78svh]` bertemu `items-center` — pada viewport tinggi, 78% tinggi
+layar jadi raksasa dan konten yang dipusatkan meninggalkan rongga di kedua
+sisi. Tablet potret (820x1180) kena hal yang sama.
+
+Diperbaiki dengan MEMBATASI, bukan mengecilkan: `min-h-[min(78svh,42rem)]`.
+Hasil setelah perbaikan — 980x2178: 1699 → **672px**; 1280x800: **624px
+(tidak berubah)**; 375x812: **658px (tidak berubah)**. Batasnya hanya
+memotong kasus ekstrem.
+
+**Pelajarannya sama dengan Jagoan Medis:** empat breakpoint standar, dua tema,
+dan nol console error semuanya hijau — bug ini tetap lolos, dan baru muncul
+dari satu tangkapan layar perangkat nyata. Ukuran viewport yang diuji tidak
+pernah cukup mewakili yang dipakai orang.
+
 **Menunggu Tor:**
 - Repo masih **privat**. Untuk audiens klien, repo publik adalah bukti kualitas
   kode — tinggal `gh repo edit flugel100/portfolio --visibility public`.

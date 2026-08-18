@@ -6,7 +6,18 @@ import { Reveal } from "./reveal";
 
 export function Hero({ t }: { t: Dict }) {
   return (
-    <section className="relative flex min-h-[78svh] items-center pt-8 pb-16">
+    /*
+      Tinggi minimum DIBATASI (`min(78svh, 42rem)`), bukan 78svh telanjang.
+      Pada viewport yang tinggi -- HP dalam mode "Situs desktop" melaporkan
+      sekitar 980x2178 -- 78svh menjadi 1699px, dan `items-center` menyisakan
+      634px kosong di atas serta 666px di bawah. Terlihat di tangkapan layar
+      HP Tor sebagai halaman yang seolah gagal memuat.
+
+      Batas 42rem tidak mengubah apa pun di viewport lazim (1280x800 -> 624px,
+      375x812 -> 633px, dua-duanya di bawah batas); ia hanya memotong kasus
+      ekstrem. Diukur, bukan dikira-kira.
+    */
+    <section className="relative flex min-h-[min(78svh,42rem)] items-center pt-8 pb-16">
       <Container>
         <div className="max-w-4xl">
           <Reveal>
