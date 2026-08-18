@@ -18,7 +18,7 @@ export function About({ t, lang }: { t: Dict; lang: Lang }) {
       aria-labelledby="about-title"
     >
       <Container>
-        <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-24">
+        <div className="grid items-start gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-24">
           <div>
             <Reveal>
               <Eyebrow>{t.about.eyebrow}</Eyebrow>
@@ -44,7 +44,10 @@ export function About({ t, lang }: { t: Dict; lang: Lang }) {
             </Reveal>
           </div>
 
-          <Reveal delay={0.1}>
+          {/* Sticky di layar lebar: kolom kanan jauh lebih pendek daripada
+              kolom teks, jadi tanpa ini ada ~600px ruang kosong yang terbaca
+              sebagai halaman belum selesai, bukan sebagai kelegaan. */}
+          <Reveal delay={0.1} className="lg:sticky lg:top-24 lg:self-start">
             <dl className="divide-y divide-line rounded-xl border border-line bg-bg">
               {facts.map((f) => (
                 <div key={f.k} className="flex items-baseline justify-between gap-6 px-6 py-5">
