@@ -116,7 +116,18 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /*
+      `scroll-behavior: smooth` SENGAJA TIDAK dipasang di sini.
+
+      Next.js App Router memanggil window.scrollTo(0,0) saat pindah rute;
+      dengan smooth, panggilan itu jadi animasi yang tertabrak render halaman
+      baru dan berhenti di posisi acak. Terukur: menekan tombol ganti bahasa
+      dari posisi paling atas melemparkan layar ke 8.400px.
+
+      Kehalusan sekarang ditangani components/anchor-halus.tsx, hanya untuk
+      klik tautan jangkar -- lihat penjelasan lengkapnya di sana.
+    */
+
     /* Nav sticky menutupi target anchor kalau ini tidak diatur. */
     scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
@@ -201,9 +212,6 @@
   dipangkas jadi sangat singkat.
 */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   /* Isi langsung tampil di tempatnya -- tanpa geser, tanpa pudar. */
   [data-reveal] {
     animation: none !important;

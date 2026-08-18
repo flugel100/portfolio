@@ -5,6 +5,7 @@ import { LANGS, site } from "@/content/site";
 import { toLang } from "@/lib/lang";
 import { getDict } from "@/content/i18n";
 import { StructuredData } from "@/components/structured-data";
+import { AnchorHalus } from "@/components/anchor-halus";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -88,7 +89,10 @@ export default async function LangLayout({
         <script dangerouslySetInnerHTML={{ __html: preScript }} />
         <StructuredData lang={lang} />
       </head>
-      <body className="bg-bg text-fg font-sans antialiased">{children}</body>
+      <body className="bg-bg text-fg font-sans antialiased">
+        <AnchorHalus />
+        {children}
+      </body>
     </html>
   );
 }
