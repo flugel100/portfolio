@@ -54,6 +54,18 @@ export async function generateMetadata({
       images: ["/og.png"],
     },
     robots: { index: true, follow: true },
+
+    // Verifikasi kepemilikan Google Search Console.
+    //
+    // Token yang sama dipakai dua metode: sebagai TXT record DNS
+    // (`google-site-verification=<token>`) dan sebagai meta tag ini. Yang
+    // DNS harus dipasang Tor di panel Rumahweb -- domainnya tidak dikelola
+    // dari sini. Meta tag dipasang sebagai jalur kedua: kalau properti
+    // didaftarkan bertipe "URL prefix", ini saja sudah cukup dan langkah DNS
+    // tidak diperlukan.
+    verification: {
+      google: "ws2PdAtxMl3l-bP9gnFAnhQ6t5PPNm9J9EwwQZfXNi8",
+    },
   };
 }
 
