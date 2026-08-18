@@ -70,4 +70,26 @@ check https://app.flugel.my.id/demo/jagoan-medis/app/index.html 200
 check https://app.flugel.my.id/docs/session-log.md 404
 
 [ "$fail" -eq 0 ] || { echo "==> ADA YANG GAGAL"; exit 1; }
+
+# Beri tahu mesin pencari lewat IndexNow (Bing, Yandex, Seznam sekaligus).
+#
+# Ini satu-satunya jalur pemberitahuan yang TIDAK menuntut akun: verifikasinya
+# lewat berkas kunci yang di-host di domain ini sendiri. Ping sitemap gaya lama
+# sudah dihentikan Google maupun Bing, jadi jangan dipakai lagi.
+#
+# Kuncinya memang publik by design -- ia harus bisa dibaca siapa pun di
+# https://app.flugel.my.id/<kunci>.txt supaya kepemilikan domain terbukti.
+INDEXNOW_KEY="$(ls public/*.txt 2>/dev/null | grep -oE '[a-f0-9]{64}' | head -1)"
+if [ -n "$INDEXNOW_KEY" ]; then
+  code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "https://api.indexnow.org/indexnow" \
+    -H "Content-Type: application/json; charset=utf-8" --max-time 20 \
+    -d "{\"host\":\"app.flugel.my.id\",\"key\":\"$INDEXNOW_KEY\",\"keyLocation\":\"https://app.flugel.my.id/$INDEXNOW_KEY.txt\",\"urlList\":[\"https://app.flugel.my.id/id/\",\"https://app.flugel.my.id/en/\"]}" || echo "000")
+  # 200/202 sama-sama berarti diterima. Kegagalan di sini TIDAK menggagalkan
+  # deploy -- situsnya sudah terbit, pemberitahuan cuma bonus.
+  case "$code" in
+    200|202) echo "==> IndexNow: diberitahu (HTTP $code)" ;;
+    *)       echo "==> IndexNow: gagal (HTTP $code) -- situs tetap terbit" ;;
+  esac
+fi
+
 echo "==> Selesai."
