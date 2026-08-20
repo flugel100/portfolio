@@ -42,6 +42,22 @@ echo "==> Sinkronkan demo Jagoan Medis"
 if [ -d "$DEMO_SRC" ]; then
   mkdir -p "$DEMO_DEST"
   rsync -a --delete "$DEMO_SRC/" "$DEMO_DEST/"
+
+  # Skrip SDK CrazyGames DIBUANG dari salinan yang tayang di domain ini.
+  #
+  # Bundel game-nya identik dengan yang diunggah ke CrazyGames -- yang berbeda
+  # hanya satu tag <script>. Di luar domain CrazyGames, SDK itu tidak
+  # berfungsi apa pun (`initialize()` sudah menelan kegagalannya), jadi
+  # memuatnya hanya menarik berkas pihak ketiga ke domain sendiri tanpa alasan.
+  # Keputusan Tor, 20 Agustus 2026.
+  #
+  # Kenapa di SINI dan bukan diedit manual sekali: pernah dilakukan manual,
+  # lalu deploy berikutnya menyalin build mentah dan memasangnya kembali tanpa
+  # ada yang memberi tahu. Keputusan yang tidak tertulis di skrip akan selalu
+  # kalah oleh otomasi.
+  sed -i 's|[[:space:]]*<script src="https://sdk\.crazygames\.com/[^"]*"></script>||' \
+    "$DEMO_DEST/index.html"
+
   echo "    $(du -sh "$DEMO_DEST" | cut -f1) ter-deploy"
 else
   echo "    LEWAT: $DEMO_SRC tidak ada -- tombol demo akan 404."
@@ -68,6 +84,24 @@ check https://app.flugel.my.id/sitemap.xml 200
 check https://app.flugel.my.id/id/demo/jagoan-medis/ 200
 check https://app.flugel.my.id/demo/jagoan-medis/app/index.html 200
 check https://app.flugel.my.id/docs/session-log.md 404
+
+# Kode 200 saja TIDAK cukup: sinkronisasi separuh jalan atau cache basi tetap
+# menjawab 200 sambil menyajikan isi yang lama. Dua pemeriksaan di bawah
+# menguji ISI-nya.
+periksa_isi() { # url  pola  jumlah-harapan  keterangan
+  n=$(curl -s --max-time 25 "$1" | grep -c "$2" || true)
+  if [ "$n" = "$3" ]; then printf '    OK    %-52s %s\n' "$4" "$n"
+  else printf '    GAGAL %-52s %s (harusnya %s)\n' "$4" "$n" "$3"; fail=1; fi
+}
+periksa_isi https://app.flugel.my.id/demo/jagoan-medis/app/ \
+  "sdk.crazygames.com" 0 "demo bebas skrip pihak ketiga"
+
+# Aset galeri yang tayang harus SAMA PERSIS dengan yang ada di repo.
+ASET="karya/jagoan-medis/id/02.webp"
+live=$(curl -s --max-time 40 "https://app.flugel.my.id/$ASET" | md5sum | cut -d' ' -f1)
+repo=$(md5sum "public/$ASET" | cut -d' ' -f1)
+if [ "$live" = "$repo" ]; then printf '    OK    %-52s cocok\n' "aset galeri identik dengan repo"
+else printf '    GAGAL %-52s %s != %s\n' "aset galeri" "$live" "$repo"; fail=1; fi
 
 [ "$fail" -eq 0 ] || { echo "==> ADA YANG GAGAL"; exit 1; }
 
