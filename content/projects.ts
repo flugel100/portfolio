@@ -7,9 +7,14 @@ import type { Lang } from "./site";
  *
  * ATURAN KEJUJURAN (mengikat, dari brief Tor):
  * - Tidak ada testimonial, jumlah pengguna, klien, revenue, atau penghargaan.
- * - `metrics` HANYA angka yang benar-benar terverifikasi. Nilai 139 test dan
- *   400 puzzle Jagoan Medis diukur langsung 2026-08-18; 85 test Kalkulator
- *   Nakes berasal dari suite-nya sendiri.
+ * - `metrics` HANYA angka yang benar-benar terverifikasi. Nilai 172 test dan
+ *   400 puzzle Jagoan Medis diukur ulang langsung 2026-08-20 (`flutter test`);
+ *   85 test Kalkulator Nakes berasal dari suite-nya sendiri.
+ *
+ *   Angka test IKUT BERUBAH tiap kali suite bertambah. Sebelumnya tertulis
+ *   139 -- benar saat diukur 18 Agustus, sudah tertinggal 33 dua hari
+ *   kemudian. Portofolio yang menjual ketelitian tidak boleh memajang angka
+ *   basi, jadi ukur ulang sebelum menyentuh halaman ini.
  * - `status` menyatakan keadaan sebenarnya. Jagoan Medis BELUM listing di
  *   Play Store, jadi tidak boleh ditulis "tersedia di Play Store".
  * - `repo` hanya diisi kalau reponya memang publik. Mayoritas repo Tor privat,
@@ -63,7 +68,7 @@ export const projects: Project[] = [
     stack: ["Flutter", "Dart", "Firebase", "GitHub Actions"],
     status: "prerelease",
     metrics: [
-      { value: "139", label: { id: "uji otomatis", en: "automated tests" } },
+      { value: "172", label: { id: "uji otomatis", en: "automated tests" } },
       { value: "400", label: { id: "soal", en: "puzzles" } },
       { value: "2", label: { id: "bahasa", en: "languages" } },
     ],
