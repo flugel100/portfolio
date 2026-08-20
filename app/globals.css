@@ -226,3 +226,50 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Pergantian tema: satu sapuan lingkaran, bukan lompatan ────────────────
+   Dipasang 20 Agustus 2026. Sebelumnya latar berpindah dalam SATU frame --
+   diukur nol warna antara selama satu detik penuh -- sementara `header`
+   punya transisi 0,3 detik. Satu bagian memudar, sisanya menyentak.
+
+   Hanya berlaku saat `applyTheme` menandai <html data-ganti-tema>. Tanpa
+   penanda itu, view transition lain (mis. navigasi) memakai perilaku
+   bawaannya dan tidak ikut terpengaruh aturan di bawah. */
+::view-transition-group(root) {
+  animation-duration: 480ms;
+}
+
+html[data-ganti-tema]::view-transition-old(root),
+html[data-ganti-tema]::view-transition-new(root) {
+  /* Keduanya digambar utuh; yang lama diam sebagai latar, yang baru menyapu
+     di atasnya. Cross-fade bawaan dimatikan supaya tidak ada momen pucat
+     saat dua potret saling tembus. */
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-ganti-tema]::view-transition-old(root) {
+  z-index: 0;
+}
+
+html[data-ganti-tema]::view-transition-new(root) {
+  z-index: 1;
+  animation: sapuan-tema 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes sapuan-tema {
+  from {
+    clip-path: circle(0 at var(--tema-x, 50%) var(--tema-y, 0));
+  }
+  to {
+    clip-path: circle(var(--tema-r, 150vmax) at var(--tema-x, 50%) var(--tema-y, 0));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Jaring pengaman: applyTheme sudah melewati view transition sepenuhnya
+     saat gerak diminta dikurangi, tapi aturan ini menutup jalur lain. */
+  html[data-ganti-tema]::view-transition-new(root) {
+    animation: none;
+  }
+}
